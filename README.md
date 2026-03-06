@@ -1,311 +1,285 @@
-# 🚀 Kos Hunter Backend API
+# 🚀 KOS BOOKING API
+
+### Modern Boarding House Booking Backend
 
 <p align="center">
 
-<img src="https://readme-typing-svg.herokuapp.com/?font=Fira+Code&size=28&center=true&vCenter=true&width=600&lines=Kos+Hunter+Backend+API;Node.js+%7C+Express+%7C+MySQL;REST+API+Project;Built+by+Hizkia+Agellvin+Girsang" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,100:203a43&height=200&section=header&text=Kos%20Booking%20API&fontSize=40&fontColor=ffffff&animation=fadeIn" />
+
+</p>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge&logo=node.js"/>
+<img src="https://img.shields.io/badge/Express.js-Framework-black?style=for-the-badge&logo=express"/>
+<img src="https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge&logo=mysql"/>
+<img src="https://img.shields.io/badge/API-REST-orange?style=for-the-badge"/>
 
 </p>
 
 ---
 
-<p align="center">
+# ✨ Project Overview
 
-![NodeJS](https://img.shields.io/badge/Node.js-Backend-green?style=for-the-badge\&logo=node.js)
-![Express](https://img.shields.io/badge/Express.js-Framework-black?style=for-the-badge\&logo=express)
-![MySQL](https://img.shields.io/badge/MySQL-Database-blue?style=for-the-badge\&logo=mysql)
-![API](https://img.shields.io/badge/REST-API-orange?style=for-the-badge)
+**Kos Booking API** adalah sistem backend yang dibuat untuk mengelola pemesanan kamar kos secara digital.
 
-</p>
-
----
-
-# 👨‍💻 Developer Identity
-
-|             |                                    |
-| ----------- | ---------------------------------- |
-| **Name**    | Hizkia Agellvin Girsang            |
-| **Class**   | XI RPL 3                           |
-| **Project** | Kos Hunter Backend API             |
-| **Purpose** | Backend System Development Project |
-
----
-
-# 📌 About This Project
-
-**Kos Hunter Backend API** adalah sistem backend yang dibuat untuk membantu masyarakat mencari kos dan melakukan pemesanan kamar kos secara online.
-
-Sistem ini memiliki **dua role pengguna**:
+Sistem ini memungkinkan:
 
 👤 **Society**
-→ Pengguna yang mencari dan memesan kos
 
-🏢 **Owner**
-→ Pemilik kos yang mengelola kos dan booking
-
----
-
-# ✨ System Features
-
-## 👤 Society Features
-
-* Register akun
-* Login akun
 * Melihat daftar kos
-* Filter kos berdasarkan gender kamar
-* Memberikan review kos
 * Melakukan booking kamar
-* Melihat bukti pemesanan
+
+🏠 **Owner**
+
+* Menambahkan kos
+* Melihat booking
+* Mengubah status booking (accept / reject)
+
+Project ini dibuat menggunakan **Node.js + Express + MySQL** dengan sistem **REST API**.
 
 ---
 
-## 🏢 Owner Features
+# 👨‍💻 Developer
 
-* Registrasi owner
-* Login owner
-* CRUD data kamar kos
-* CRUD fasilitas kos
-* Membalas review society
-* Accept / Reject booking
-* Update data owner
-* Melihat histori transaksi booking
+**Nama :** Hizkia Agellvin Girsang
+**Kelas :** XI RPL 3
+
+Project ini dibuat sebagai **tugas backend development**.
 
 ---
 
-# 🧠 Tech Stack
+# ⚡ Tech Stack
 
-| Technology | Usage              |
-| ---------- | ------------------ |
-| Node.js    | Backend Runtime    |
-| Express.js | REST API Framework |
-| MySQL      | Database           |
-| Postman    | API Testing        |
-| GitHub     | Version Control    |
+| Technology | Function        |
+| ---------- | --------------- |
+| Node.js    | Runtime backend |
+| Express.js | Framework API   |
+| MySQL      | Database        |
+| Postman    | Testing API     |
 
 ---
 
-# 📂 Project Structure
+# 🗂 Project Structure
 
 ```
 kos-backend
 │
+├── config
+│   └── db.js
+│
 ├── controllers
 │   ├── authControllers.js
 │   ├── kosControllers.js
-│   ├── roomControllers.js
 │   ├── bookingControllers.js
-│   ├── reviewControllers.js
-│   └── facilityControllers.js
 │
 ├── routes
 │   ├── authRoutes.js
 │   ├── kosRoutes.js
-│   ├── roomRoutes.js
 │   ├── bookingRoutes.js
-│   ├── reviewRoutes.js
-│   └── facilityRoutes.js
-│
-├── config
-│   └── db.js
 │
 ├── app.js
-└── package.json
+├── package.json
 ```
 
 ---
 
-# 🔌 API Endpoint Example
+# 🗄 Database Structure
 
-### Register User
+### users
+
+| field    | type    |
+| -------- | ------- |
+| id       | int     |
+| name     | varchar |
+| email    | varchar |
+| password | varchar |
+| phone    | varchar |
+| role     | enum    |
+
+---
+
+### kos
+
+| field       | type    |
+| ----------- | ------- |
+| id          | int     |
+| owner_id    | int     |
+| name        | varchar |
+| address     | text    |
+| price       | int     |
+| gender      | enum    |
+| description | text    |
+
+---
+
+### booking
+
+| field   | type |
+| ------- | ---- |
+| id      | int  |
+| user_id | int  |
+| kos_id  | int  |
+| status  | enum |
+
+---
+
+# 🔌 API Endpoints
+
+## Auth
+
+Register
 
 ```
-POST /api/register
+POST /register
+```
+
+Login
+
+```
+POST /login
 ```
 
 ---
 
-### Login
+## Kos
+
+Tambah Kos
 
 ```
-POST /api/login
+POST /kos
 ```
 
----
-
-### Get All Kos
+Lihat Semua Kos
 
 ```
-GET /api/kos
+GET /kos
 ```
 
----
-
-### Filter Kos
+Filter Kos
 
 ```
-GET /api/kos?gender=male
-GET /api/kos?gender=female
+GET /kos?gender=male
+GET /kos?gender=female
 ```
 
 ---
 
-### Booking Room
+## Booking
+
+Booking Kos
 
 ```
-POST /api/bookings
+POST /booking
 ```
 
----
-
-### Accept / Reject Booking
+Owner melihat booking
 
 ```
-PUT /api/bookings/:id
+GET /booking/owner/:owner_id
 ```
 
----
-
-### Add Review
+Update Status Booking
 
 ```
-POST /api/reviews
+PUT /booking/:id
 ```
 
----
-
-### Reply Review
+Body:
 
 ```
-PUT /api/reviews/:id
+{
+"status":"accepted"
+}
 ```
 
 ---
 
-# 🗄 Database Tables
+# 🎯 Kenapa Tidak Menggunakan Prisma?
 
-Database menggunakan **MySQL** dengan beberapa tabel utama:
+Dalam project ini **tidak menggunakan Prisma ORM**, tetapi menggunakan **query MySQL manual**.
 
-* users
-* kos
-* rooms
-* bookings
-* reviews
-* facilities
+Alasannya:
 
----
+1️⃣ **Lebih mudah dipahami oleh pemula**
+Karena query SQL langsung terlihat sehingga membantu memahami cara kerja database.
 
-# 📌 Why Not Using Prisma ORM?
+2️⃣ **Kontrol penuh terhadap query**
+Developer dapat mengatur query secara manual tanpa bergantung pada ORM.
 
-Dalam project ini saya **tidak menggunakan Prisma ORM**, tetapi menggunakan **query MySQL secara manual**.
+3️⃣ **Lebih ringan**
+Tanpa tambahan dependency ORM sehingga project lebih sederhana.
 
-### Alasan:
-
-✔ Untuk melatih pemahaman SQL secara langsung
-✔ Lebih mudah memahami hubungan backend dan database
-✔ Mengurangi kompleksitas konfigurasi ORM
-✔ Cocok untuk pembelajaran dasar backend development
-
-Dengan menggunakan query manual seperti:
-
-```
-SELECT
-INSERT
-UPDATE
-DELETE
-```
-
-saya dapat memahami bagaimana **REST API berinteraksi langsung dengan database**.
+4️⃣ **Latihan memahami SQL**
+Project ini bertujuan untuk melatih penggunaan SQL secara langsung.
 
 ---
 
-# 📌 Why Creating Database Manually?
+# 🎬 API Testing
 
-Database dibuat manual menggunakan **MySQL CLI**.
+Testing dilakukan menggunakan **Postman**.
 
-### Tujuan:
+Flow testing:
 
-1️⃣ Memahami struktur database secara langsung
-2️⃣ Melatih penggunaan **DDL (Data Definition Language)**
-
-Contoh:
-
-```
-CREATE DATABASE
-CREATE TABLE
-ALTER TABLE
-```
-
-3️⃣ Memahami relasi antar tabel dalam sistem backend.
+1️⃣ Register user
+2️⃣ Login
+3️⃣ Owner menambahkan kos
+4️⃣ Society melihat kos
+5️⃣ Society melakukan booking
+6️⃣ Owner menerima / menolak booking
 
 ---
 
-# 🚀 How To Run This Project
+# 📊 Example Data
 
-### Install dependency
+Kos untuk **Male**
 
 ```
-npm install
+Kos Jaya
+```
+
+Kos untuk **Female**
+
+```
+Kos Putri Jaya
 ```
 
 ---
 
-### Run server
+# 🎨 Preview
 
-```
-npm start
-```
+<p align="center">
 
----
+<img src="https://media.giphy.com/media/QNFhOolVeCzPQ2Mx85/giphy.gif" width="400"/>
 
-### Server running on
-
-```
-http://localhost:3000
-```
+</p>
 
 ---
 
-# 🧪 API Testing
+# ⭐ Conclusion
 
-Semua endpoint diuji menggunakan **Postman** untuk memastikan API berjalan dengan baik.
+Project ini menunjukkan implementasi **REST API Backend sederhana untuk sistem booking kos** menggunakan:
 
----
+✔ Node.js
+✔ Express.js
+✔ MySQL
 
-# 📊 System Workflow
+Backend ini dapat dikembangkan lebih lanjut menjadi **aplikasi fullstack** dengan frontend seperti:
 
-```
-Society Register/Login
-        ↓
-Melihat daftar kos
-        ↓
-Filter kamar
-        ↓
-Booking kamar
-        ↓
-Owner menerima / menolak booking
-        ↓
-Society memberikan review
-        ↓
-Owner membalas review
-```
-
----
-
-# 🎯 Project Conclusion
-
-Project **Kos Hunter Backend API** berhasil dibuat menggunakan arsitektur **REST API dengan Node.js dan MySQL**.
-
-Sistem ini memungkinkan:
-
-✔ Society mencari dan memesan kos
-✔ Owner mengelola kos dan pemesanan
-✔ Sistem review antara pengguna dan owner
-
-Project ini dibuat sebagai **pembelajaran backend development dan implementasi REST API**.
+* React
+* Next.js
+* Mobile App
 
 ---
 
 <p align="center">
 
-⭐ **If you like this project, don't forget to give it a star!** ⭐
+💡 *Built with passion and learning spirit*
+
+</p>
+
+<p align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:203a43,100:0f2027&height=120&section=footer"/>
 
 </p>
